@@ -1,1 +1,12 @@
-<p>user-profile works!</p>
+<p-card header={{userProfile.DisplayName}} subheader="Play Lists" [style]="{ width: '360px' }">
+    <ng-template pTemplate="header">
+        <img alt="Card" src={{userProfile.ImageUrl}} />
+    </ng-template>
+    <p>
+        Lorem ipsum dolor sit amet...
+    </p>
+    <ng-template pTemplate="footer">
+        <div class="flex gap-3 mt-1">
+        </div>
+    </ng-template>
+</p-card>
