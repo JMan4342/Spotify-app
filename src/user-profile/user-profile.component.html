@@ -4,8 +4,8 @@
       <p-card
         header="{{ userProfile.DisplayName }}"
         subheader="Play Lists"
-        class="col-6"
-        [style]="{ width: '360px' }"
+        class="col-3"
+        [style]="{ width: '100%' }"
       >
         <ng-template pTemplate="header">
           <img alt="Card" src="{{ userProfile.ImageUrl }}" />
@@ -16,18 +16,32 @@
         </ng-template>
       </p-card>
       <p-card
-        header="{{ userProfile.DisplayName }}"
-        subheader="Play Lists"
-        class="col-6"
-        [style]="{ width: '360px' }"
+        header="Top Tracks"
+        subheader="Top Played Tracks"
+        class="col-9"
+        [style]="{ width: '100%' }"
       >
-        <ng-template pTemplate="header">
-          <img alt="Card" src="{{ userProfile.ImageUrl }}" />
-        </ng-template>
-        <p>Lorem ipsum dolor sit amet...</p>
-        <ng-template pTemplate="footer">
-          <div class="flex gap-3 mt-1"></div>
-        </ng-template>
+        <p-table
+          [value]="userTopTracks"
+          [tableStyle]="{ 'min-width': '50rem' }"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th colspan="1"></th>
+              <th>Track</th>
+              <th>Artist</th>
+              <th>Album</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-track>
+            <tr>
+              <td><img alt="Album Image" src="{{ track.AlbumImage }}" /></td>
+              <td>{{ track.TrackName }}</td>
+              <td>{{ track.ArtistName }}</td>
+              <td>{{ track.Album }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
       </p-card>
     </div>
   </div>
