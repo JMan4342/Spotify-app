@@ -23,4 +23,19 @@ export class UserProfileService {
         })
       );
   }
+
+  getCurrentUserTopArtists(access_token: string): Observable<any> {
+    return this.http
+      .get(
+        'https://api.spotify.com/v1/me/top/tracks?limit=5',
+        {headers: {
+          'Authorization': 'Bearer ' + access_token,
+        }}
+      )
+      .pipe(
+        map((result) => {
+          return result;
+        })
+      );
+  }
 }
