@@ -1,12 +1,34 @@
-<p-card header={{userProfile.DisplayName}} subheader="Play Lists" [style]="{ width: '360px' }">
-    <ng-template pTemplate="header">
-        <img alt="Card" src={{userProfile.ImageUrl}} />
-    </ng-template>
-    <p>
-        Lorem ipsum dolor sit amet...
-    </p>
-    <ng-template pTemplate="footer">
-        <div class="flex gap-3 mt-1">
-        </div>
-    </ng-template>
+<p-card>
+  <div class="container">
+    <div class="row">
+      <p-card
+        header="{{ userProfile.DisplayName }}"
+        subheader="Play Lists"
+        class="col-6"
+        [style]="{ width: '360px' }"
+      >
+        <ng-template pTemplate="header">
+          <img alt="Card" src="{{ userProfile.ImageUrl }}" />
+        </ng-template>
+        <p>Lorem ipsum dolor sit amet...</p>
+        <ng-template pTemplate="footer">
+          <div class="flex gap-3 mt-1"></div>
+        </ng-template>
+      </p-card>
+      <p-card
+        header="{{ userProfile.DisplayName }}"
+        subheader="Play Lists"
+        class="col-6"
+        [style]="{ width: '360px' }"
+      >
+        <ng-template pTemplate="header">
+          <img alt="Card" src="{{ userProfile.ImageUrl }}" />
+        </ng-template>
+        <p>Lorem ipsum dolor sit amet...</p>
+        <ng-template pTemplate="footer">
+          <div class="flex gap-3 mt-1"></div>
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
 </p-card>
