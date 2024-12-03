@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SearchService } from './search.service';
 import { HomeService } from '../home/home.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-search',
@@ -15,8 +16,8 @@ export class SearchComponent implements OnInit {
   artists: string[] = [];
   access_token: string = '';
 
-  constructor(private searchService: SearchService, private homeService: HomeService) {
-    this.access_token = this.homeService.accessToken$;
+  constructor(private searchService: SearchService, private homeService: HomeService, private loginService: LoginService) {
+    this.access_token = this.loginService.accessToken$;
   }
 
   ngOnInit() {

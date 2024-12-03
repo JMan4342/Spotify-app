@@ -10,24 +10,24 @@ import { HomeService } from './home.service';
 })
 export class HomeComponent implements OnInit {
   constructor(private homeService: HomeService) {
-    this.generateToken();
+    // this.generateToken();
   }
 
   ngOnInit() {
     // this.generateToken();
   }
 
-  generateToken() {
-    const clientId = '94ae63fe83f2425aacff1c2e78a88160';
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get("code");
+  // generateToken() {
+  //   const clientId = '94ae63fe83f2425aacff1c2e78a88160';
+  //   const params = new URLSearchParams(window.location.search);
+  //   const code = params.get("code");
 
-    if (!code) {
-      console.log("No code");
-    } else {
-      this.getAccessToken(clientId, code);
-    }
-  }
+  //   if (!code) {
+  //     console.log("No code");
+  //   } else {
+  //     this.getAccessToken(clientId, code);
+  //   }
+  // }
 
   // async redirectToAuthCodeFlow(clientId: string) {
   //   const verifier = this.generateCodeVerifier(128);
@@ -46,25 +46,25 @@ export class HomeComponent implements OnInit {
   //   document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
   // }
 
-  async getAccessToken(clientId: string, code: string) {
-    const verifier = localStorage.getItem("verifier");
+  // async getAccessToken(clientId: string, code: string) {
+  //   const verifier = localStorage.getItem("verifier");
 
-    const params = new URLSearchParams();
-    params.append("client_id", clientId);
-    params.append("grant_type", "authorization_code");
-    params.append("code", code);
-    params.append("redirect_uri", "http://localhost:4200/callback/");
-    params.append("code_verifier", verifier!);
+  //   const params = new URLSearchParams();
+  //   params.append("client_id", clientId);
+  //   params.append("grant_type", "authorization_code");
+  //   params.append("code", code);
+  //   params.append("redirect_uri", "http://localhost:4200/callback/");
+  //   params.append("code_verifier", verifier!);
 
-    const result = await fetch("https://accounts.spotify.com/api/token", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params
-    });
+  //   const result = await fetch("https://accounts.spotify.com/api/token", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  //       body: params
+  //   });
 
-    const { access_token } = await result.json();
-    this.homeService.accessToken$ = access_token;
-  }
+  //   const { access_token } = await result.json();
+  //   this.homeService.accessToken$ = access_token;
+  // }
 
   // generateCodeVerifier(length: number) {
   //   let text = '';

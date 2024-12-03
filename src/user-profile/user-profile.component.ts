@@ -8,6 +8,7 @@ import { HomeService } from '../home/home.service';
 
 import { UserProfile } from '../shared/classes/user-profile';
 import { Track } from '../shared/classes/track';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -23,8 +24,8 @@ export class UserProfileComponent {
   userTopTracks: Track[] = [];
   tempTrack: Track = new Track();
 
-  constructor(private userProfileService: UserProfileService, private homeService: HomeService) {
-    this.access_token = this.homeService.accessToken$;
+  constructor(private userProfileService: UserProfileService, private homeService: HomeService, private loginService: LoginService) {
+    this.access_token = this.loginService.accessToken$;
   }
 
   ngOnInit() {
