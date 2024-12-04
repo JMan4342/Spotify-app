@@ -1,10 +1,13 @@
 <h1>Spotify Application</h1>
-<nav>
-  <ul>
-    <li><a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a></li>
-    <li><a routerLink="/user-profile" routerLinkActive="active" ariaCurrentWhenActive="page">User Profile</a></li>
-    <li><a routerLink="/search" routerLinkActive="active" ariaCurrentWhenActive="page">Search</a></li>
-  </ul>
-</nav>
-
+<!-- <ng-container *ngIf="vm$ | async as vm"> -->
+  <!-- <app-navbar *ngIf="vm.loginAuth"></app-navbar> -->
+  <!-- <nav *ngIf="vm.loginAuth == true">
+    <ul>
+      <li><a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a></li>
+      <li><a routerLink="/user-profile" routerLinkActive="active" ariaCurrentWhenActive="page">User Profile</a></li>
+      <li><a routerLink="/search" routerLinkActive="active" ariaCurrentWhenActive="page">Search</a></li>
+    </ul>
+  </nav>  
+</ng-container> -->
+<!-- <app-navbar></app-navbar> -->
 <router-outlet />

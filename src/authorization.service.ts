@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { LoginService } from './login/login.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthorizationService {
   isAuthorized: boolean = false;
+  loginAuthBS: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+  loginAuth$ = this.loginAuthBS.asObservable();
 
   constructor(private loginService: LoginService) {
     // this.generateToken();
@@ -48,11 +52,12 @@ export class AuthorizationService {
 
     let authorized = false;
     if (this.loginService.accessToken$ && this.loginService.accessToken$.length > 0) {
-      authorized = true;
+      authorized = true;      
     } else {
       authorized = false;
     };
-    
+    this.loginAuthBS.next(authorized);
+
     return authorized
   }
 }
