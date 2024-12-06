@@ -1,6 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
 import { forkJoin } from 'rxjs';
 
 import { UserProfileService } from './user-profile.service';
@@ -10,16 +12,19 @@ import { UserProfile } from '../shared/classes/user-profile';
 import { Track } from '../shared/classes/track';
 import { LoginService } from '../login/login.service';
 import { Artist } from '../shared/classes/artist';
+import { TrackDetailsComponent } from './modals/track-details/track-details/track-details.component';
 
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [CardModule, TableModule],
+  imports: [CommonModule, CardModule, TableModule, DialogModule, TrackDetailsComponent],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css'
 })
 
 export class UserProfileComponent {
+  modalVisible: boolean = false;
+  modalShown: number = 0;
   access_token: string = '';
   userProfile: UserProfile = new UserProfile();
   userTopTracks: Track[] = [];
@@ -81,4 +86,8 @@ export class UserProfileComponent {
     // });
   }
 
+  onRowSelect(modal: number): void {
+    this.modalVisible = true;
+    this.modalShown = modal;
+  }
 }

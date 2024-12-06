@@ -12,6 +12,8 @@
       <p-card header="Top Songs" class="col-6" [style]="{ width: '100%' }">
         <p-table
           [value]="userTopTracks"
+          selectionMode="single"
+          (onRowSelect)="onRowSelect(1)"
         >
           <ng-template pTemplate="header">
             <tr>
@@ -22,7 +24,7 @@
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-track>
-            <tr>
+            <tr [pSelectableRow]="track">
               <td><img alt="Album Image" src="{{ track.AlbumImage }}" /></td>
               <td>{{ track.TrackName }}</td>
               <td>{{ track.ArtistName }}</td>
@@ -55,3 +57,8 @@
     <div class="flex gap-3 mt-1"></div>
   </ng-template>
 </p-card>
+
+<!-- Modals -->
+ <p-dialog [modal]="true" [(visible)]="modalVisible">
+   <app-track-details *ngIf="modalShown == 1"></app-track-details>
+ </p-dialog>
