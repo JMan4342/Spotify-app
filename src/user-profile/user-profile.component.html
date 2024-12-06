@@ -1,36 +1,24 @@
-<p-card>
+<p-card
+  header="{{ userProfile.DisplayName }}"
+  class="w-100"
+>
+  <ng-template pTemplate="header">
+    <div class="d-flex justify-content-center">
+      <img alt="Card" src="{{ userProfile.ImageUrl }}" style="width: 25%" />
+    </div>
+  </ng-template>
   <div class="container">
     <div class="row">
-      <p-card
-        header="{{ userProfile.DisplayName }}"
-        subheader="Play Lists"
-        class="col-3"
-        [style]="{ width: '100%' }"
-      >
-        <ng-template pTemplate="header">
-          <img alt="Card" src="{{ userProfile.ImageUrl }}" />
-        </ng-template>
-        <p>Lorem ipsum dolor sit amet...</p>
-        <ng-template pTemplate="footer">
-          <div class="flex gap-3 mt-1"></div>
-        </ng-template>
-      </p-card>
-      <p-card
-        header="Top Tracks"
-        subheader="Top Played Tracks"
-        class="col-9"
-        [style]="{ width: '100%' }"
-      >
+      <p-card header="Top Songs" class="col-6" [style]="{ width: '100%' }">
         <p-table
           [value]="userTopTracks"
-          [tableStyle]="{ 'min-width': '50rem' }"
         >
           <ng-template pTemplate="header">
             <tr>
               <th colspan="1"></th>
               <th>Track</th>
               <th>Artist</th>
-              <th>Album</th>
+              <!-- <th>Album</th> -->
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-track>
@@ -38,11 +26,32 @@
               <td><img alt="Album Image" src="{{ track.AlbumImage }}" /></td>
               <td>{{ track.TrackName }}</td>
               <td>{{ track.ArtistName }}</td>
-              <td>{{ track.Album }}</td>
+              <!-- <td>{{ track.Album }}</td> -->
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
+      <p-card header="Top Artists" class="col-6" [style]="{ width: '100%' }">
+        <p-table
+          [value]="userTopArtists"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th colspan="1"></th>
+              <th>Artist</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-artist>
+            <tr>
+              <td><img alt="Artist Image" src="{{ artist.Image }}" style="height: 64px; width: 64px"/></td>
+              <td>{{ artist.ArtistName }}</td>
             </tr>
           </ng-template>
         </p-table>
       </p-card>
     </div>
   </div>
+  <ng-template pTemplate="footer">
+    <div class="flex gap-3 mt-1"></div>
+  </ng-template>
 </p-card>
