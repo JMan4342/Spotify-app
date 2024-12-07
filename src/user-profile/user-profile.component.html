@@ -13,7 +13,7 @@
         <p-table
           [value]="userTopTracks"
           selectionMode="single"
-          (onRowSelect)="onRowSelect(1)"
+          (onRowSelect)="onRowSelect(1, $event)"
         >
           <ng-template pTemplate="header">
             <tr>
@@ -60,5 +60,7 @@
 
 <!-- Modals -->
  <p-dialog [modal]="true" [(visible)]="modalVisible">
-   <app-track-details *ngIf="modalShown == 1"></app-track-details>
+  <ng-template pTemplate="headless">
+    <app-track-details *ngIf="modalShown == 1" [inTrackDetail]="outTrackDetail" (outModalState)="modalShown = $event" (outModalVisible)="modalVisible = $event"></app-track-details>
+  </ng-template>
  </p-dialog>

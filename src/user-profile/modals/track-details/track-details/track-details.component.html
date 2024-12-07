@@ -1,1 +1,22 @@
-<p>track-details works!</p>
+<p-card
+  header="{{ inTrackDetail.TrackName }}"
+  class="col-6"
+  [style]="{ width: '100%' }"
+>
+  <div class="container">
+    <div class="row">
+      <img alt="Album Image" src="{{ inTrackDetail.AlbumImage }}" />
+    </div>
+    <div class="row">
+      {{ inTrackDetail.ArtistName }}
+    </div>
+    <div class="row">
+      {{ inTrackDetail.Album }}
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="flex gap-3 mt-1">
+        <p-button label="Close" severity="secondary" class="w-full" styleClass="w-full" (onClick)="closeModal()" />
+    </div>
+</ng-template>
+</p-card>
