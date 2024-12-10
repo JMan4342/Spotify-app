@@ -53,4 +53,20 @@ export class UserProfileService {
         })
       );
   }
+
+  getArtistTopTracks(access_token: string, id: string): Observable<any> {
+    return this.http
+    .get(
+      'https://api.spotify.com/v1/artists/' + id + '/top-tracks',
+      {headers: {
+        'Authorization': 'Bearer ' + access_token,
+      }}
+    )
+    .pipe(
+      map((result) => {
+        return result;
+      })
+    );
+
+  }
 }

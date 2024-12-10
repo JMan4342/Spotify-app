@@ -13,6 +13,7 @@ import { Track } from '../shared/classes/track';
 import { LoginService } from '../login/login.service';
 import { Artist } from '../shared/classes/artist';
 import { TrackDetailsComponent } from './modals/track-details/track-details/track-details.component';
+import { ArtistDetailsComponent } from './modals/artist-details/artist-details.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -23,12 +24,14 @@ import { TrackDetailsComponent } from './modals/track-details/track-details/trac
     TableModule,
     DialogModule,
     TrackDetailsComponent,
+    ArtistDetailsComponent
   ],
   templateUrl: './user-profile.component.html',
   styleUrl: './user-profile.component.css',
 })
 export class UserProfileComponent implements OnChanges {
   outTrackDetail: Track = new Track();
+  outArtistDetail: Artist = new Artist();
 
   modalVisible: boolean = false;
   modalShown: number = 0;
@@ -123,6 +126,10 @@ export class UserProfileComponent implements OnChanges {
       this.outTrackDetail = new Track();
       this.outTrackDetail = event.data;
       // this.outTrackDetail.emit(tempTrackDetail);
+    };
+    if (modal == 2) {
+      this.outArtistDetail = new Artist();
+      this.outArtistDetail = event.data;
     };
   }
 }

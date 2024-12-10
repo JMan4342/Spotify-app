@@ -1,0 +1,28 @@
+<p-card
+  header="{{ inArtistDetail.ArtistName }}"
+  class="col-6"
+  [style]="{ width: '100%' }"
+>
+  <div class="container">
+    <div class="row">
+      <img alt="Album Image" src="{{ inArtistDetail.Image }}" />
+    </div>
+    <div class="row">
+      {{ inArtistDetail.Genres }}
+    </div>
+    <div *ngFor="let track of inArtistDetail.TopTracks" class="row">
+      {{ track.TrackName }}
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="flex gap-3 mt-1">
+      <p-button
+        label="Close"
+        severity="secondary"
+        class="w-full"
+        styleClass="w-full"
+        (onClick)="closeModal()"
+      />
+    </div>
+  </ng-template>
+</p-card>

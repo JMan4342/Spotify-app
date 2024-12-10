@@ -36,6 +36,8 @@
       <p-card header="Top Artists" class="col-6" [style]="{ width: '100%' }">
         <p-table
           [value]="userTopArtists"
+          selectionMode="single"
+          (onRowSelect)="onRowSelect(2, $event)"
         >
           <ng-template pTemplate="header">
             <tr>
@@ -44,7 +46,7 @@
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-artist>
-            <tr>
+            <tr [pSelectableRow]="artist">
               <td><img alt="Artist Image" src="{{ artist.Image }}" style="height: 64px; width: 64px"/></td>
               <td>{{ artist.ArtistName }}</td>
             </tr>
@@ -62,5 +64,6 @@
  <p-dialog [modal]="true" [(visible)]="modalVisible">
   <ng-template pTemplate="headless">
     <app-track-details *ngIf="modalShown == 1" [inTrackDetail]="outTrackDetail" (outModalState)="modalShown = $event" (outModalVisible)="modalVisible = $event"></app-track-details>
+    <app-artist-details *ngIf="modalShown == 2" [inArtistDetail]="outArtistDetail" (outModalState)="modalShown = $event" (outModalVisible)="modalVisible = $event"></app-artist-details>
   </ng-template>
  </p-dialog>
