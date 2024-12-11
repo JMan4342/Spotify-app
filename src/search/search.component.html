@@ -1,3 +1,4 @@
-<div>
-    <p *ngFor="let artist of artists">{{artist}}</p>
-</div>
+<p-inputGroup>
+    <input type="text" pInputText [(ngModel)]="searchTerm" placeholder="Search Artists" />
+    <button type="button" pButton (click)="searchSpotify()"><i class="fa-solid fa-magnifying-glass"></i></button>
+</p-inputGroup>
