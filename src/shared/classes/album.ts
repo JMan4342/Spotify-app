@@ -5,7 +5,6 @@ export class Album {
     AlbumId: string = '';
     ArtistName: string = '';
     ArtistId: string = '';
-    Genres: string[] = [];
     Image: string= '';
     Tracks: Track[] = [];
     ReleaseDate: string = '';
