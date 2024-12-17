@@ -12,12 +12,16 @@ import { LoginService } from '../login/login.service';
 import { Album } from '../shared/classes/album';
 import { Track } from '../shared/classes/track';
 import { Artist } from '../shared/classes/artist';
+import { CardModule } from 'primeng/card';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-search',
   standalone: true,
   imports: [
     CommonModule,
+    CardModule,
+    TableModule,
     FormsModule,
     InputTextModule,
     InputGroupModule,
@@ -52,6 +56,10 @@ export class SearchComponent implements OnInit {
   }
 
   searchSpotify() {
+    this.albumSearchResults = [];
+    this.artistSearchResults = [];
+    this.trackSearchResults = [];
+
     this.searchService.searchSpotify(this.access_token, this.searchTerm).subscribe({
       next: results => {
         console.log(results);
@@ -70,7 +78,7 @@ export class SearchComponent implements OnInit {
       tempAlbum.AlbumId = a.id;
       tempAlbum.ArtistName = a.artists[0].name;
       tempAlbum.ArtistId = a.artists[0].id;
-      tempAlbum.Image = a.images[0].url;
+      tempAlbum.Image = a.images.length > 0 ? a.images[0].url : '';
       tempAlbum.ReleaseDate = a.release_date;
       this.albumSearchResults.push(tempAlbum);
     };
@@ -83,7 +91,7 @@ export class SearchComponent implements OnInit {
       tempArtist.ArtistName = a.name;
       tempArtist.ArtistId = a.id;
       tempArtist.Genres = a.genres;
-      tempArtist.Image = a.images[0].url;
+      tempArtist.Image = a.images.length > 0 ? a.images[0].url : '';
       this.artistSearchResults.push(tempArtist);
     };
     console.log('Artist', this.artistSearchResults);
@@ -93,7 +101,7 @@ export class SearchComponent implements OnInit {
     for (const t of tracks) {
       let tempTrack = new Track();
       tempTrack.Album = t.album.name;
-      tempTrack.AlbumImage = t.album.images[0].url;
+      tempTrack.AlbumImage = t.album.images.length > 0 ? t.album.images[0].url : '';
       tempTrack.AlbumId = t.album.id;
       tempTrack.ArtistName = t.artists[0].name;
       tempTrack.ArtistId = t.artists[0].id;

@@ -1,4 +1,97 @@
 <p-inputGroup>
-    <input type="text" pInputText [(ngModel)]="searchTerm" placeholder="Search Artists" />
-    <button type="button" pButton (click)="searchSpotify()"><i class="fa-solid fa-magnifying-glass"></i></button>
+  <input
+    type="text"
+    pInputText
+    [(ngModel)]="searchTerm"
+    placeholder="Search Artists"
+  />
+  <button type="button" pButton (click)="searchSpotify()">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
 </p-inputGroup>
+<p-card *ngIf="artistSearchResults.length > 0" header="Artists" class="w-100">
+  <p-table
+    [value]="artistSearchResults"
+    [scrollable]="true"
+    scrollHeight="400px"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th colspan="1"></th>
+        <th>Artist</th>
+        <th>Genre</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-artist>
+      <tr>
+        <td>
+          <img
+            alt="Artist Image"
+            src="{{ artist.Image }}"
+            style="width: 64px; height: 64px"
+          />
+        </td>
+        <td>{{ artist.ArtistName }}</td>
+        <td>{{ artist.Genres }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+<p-card *ngIf="trackSearchResults.length > 0" header="Songs" class="w-100">
+  <p-table
+    [value]="trackSearchResults"
+    [scrollable]="true"
+    scrollHeight="400px"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th colspan="1"></th>
+        <th>Song</th>
+        <th>Artist</th>
+        <th colspan="1"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-track>
+      <tr>
+        <td>
+          <img
+            alt="Artist Image"
+            src="{{ track.AlbumImage }}"
+            style="width: 64px; height: 64px"
+          />
+        </td>
+        <td>{{ track.TrackName }}</td>
+        <td>{{ track.ArtistName }}</td>
+        <td>Buttons Holder</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+<p-card *ngIf="albumSearchResults.length > 0" header="Albums" class="w-100">
+  <p-table
+    [value]="albumSearchResults"
+    [scrollable]="true"
+    scrollHeight="400px"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th colspan="1"></th>
+        <th>Album</th>
+        <th>Artist</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-album>
+      <tr>
+        <td>
+          <img
+            alt="Artist Image"
+            src="{{ album.Image }}"
+            style="width: 64px; height: 64px"
+          />
+        </td>
+        <td>{{ album.AlbumName }}</td>
+        <td>{{ album.ArtistName }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
