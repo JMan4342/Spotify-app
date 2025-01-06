@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     params.append('client_id', clientId);
     params.append('response_type', 'code');
     params.append('redirect_uri', 'http://localhost:4200/login/');
-    params.append('scope', 'user-read-private user-read-email user-top-read');
+    params.append('scope', 'user-read-private user-read-email user-top-read user-read-playback-state user-modify-playback-state streaming');
     params.append('code_challenge_method', 'S256');
     params.append('code_challenge', await challenge);
 
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
 
   async generateCodeChallenge(codeVerifier: string) {
     const data = new TextEncoder().encode(codeVerifier);
-    const digest = await window.crypto.subtle.digest('SHA-256', data);
+    const digest = await (<any>window).crypto.subtle.digest('SHA-256', data);
     return btoa(String.fromCharCode.apply(null, [...new Uint8Array(digest)]))
       .replace(/\+/g, '-')
       .replace(/\//g, '_')
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
 
   generateToken() {
     const clientId = '94ae63fe83f2425aacff1c2e78a88160';
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams((<any>window).location.search);
     const code = params.get("code");
 
     if (!code) {

@@ -1,5 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from './home.service';
+import { LoginService } from '../login/login.service';
+// import { SpotifyApi } from "@spotify/web-api-ts-sdk";
+
+// declare global {
+//   interface window {
+//     onSpotifyWebPlaybackSDKReady: () => void;
+//   }
+// }
+
+declare var Spotify:any;
 
 @Component({
   selector: 'app-home',
@@ -9,12 +19,65 @@ import { HomeService } from './home.service';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  constructor(private homeService: HomeService) {
-    // this.generateToken();
+access_token: string = '';
+
+  constructor(private homeService: HomeService, 
+    private loginService: LoginService) {
+    this.access_token = this.loginService.accessToken$;
+    // this.initializePlayer();
   }
 
   ngOnInit() {
-    // this.generateToken();
+    this.initializePlayer();
+
+    this.homeService.getDevices(this.access_token).subscribe({
+      next: results => {
+        console.log('Devices', results);
+      },
+      error: err => console.log(err),
+    });
+  }
+
+  initializePlayer() {
+    const script = document.createElement('script');
+    script.src = 'https://sdk.scdn.co/spotify-player.js';
+    script.type = 'text/javascript';
+    script.addEventListener('load', (e) => {
+      console.log(e);
+    });
+    document.head.appendChild(script);
+    (<any>window).onSpotifyWebPlaybackSDKReady = () => {
+        const token = this.access_token;
+        const player = new Spotify.Player({
+            name: 'Web Playback SDK Quick Start Player',
+            getOAuthToken: (cb: any) => { cb(token); },
+            volume: 0.5
+        });
+    
+        // Ready
+        player.addListener('ready', (device_id: string) => {
+            console.log('Ready with Device ID', device_id);
+        });
+    
+        // Not Ready
+        player.addListener('not_ready', (device_id: string) => {
+            console.log('Device ID has gone offline', device_id);
+        });
+    
+        player.addListener('initialization_error', (message: string) => {
+            console.error(message);
+        });
+    
+        player.addListener('authentication_error', (message: string) => {
+            console.error(message);
+        });
+    
+        player.addListener('account_error', (message: string) => {
+            console.error(message);
+        });
+    
+        player.connect();
+    }
   }
 
   // generateToken() {
