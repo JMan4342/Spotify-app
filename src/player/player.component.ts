@@ -14,6 +14,8 @@ declare var Spotify:any;
 export class PlayerComponent implements OnInit {
   access_token: string = '';
 
+  track = this.playerService.track;
+
   constructor(
     private playerService: PlayerService,
     private loginService: LoginService

@@ -14,6 +14,7 @@ import { Track } from '../shared/classes/track';
 import { Artist } from '../shared/classes/artist';
 import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
+import { PlayerService } from '../player/player.service';
 
 @Component({
   selector: 'app-search',
@@ -42,7 +43,8 @@ export class SearchComponent implements OnInit {
   constructor(
     private searchService: SearchService,
     private homeService: HomeService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private playerService: PlayerService
   ) {
     this.access_token = this.loginService.accessToken$;
   }
@@ -110,5 +112,9 @@ export class SearchComponent implements OnInit {
       this.trackSearchResults.push(tempTrack);
     };
     console.log('Tracks', this.trackSearchResults);
+  }
+
+  playTrack(track: Track): void {
+    this.playerService.updateTrack(track);
   }
 }

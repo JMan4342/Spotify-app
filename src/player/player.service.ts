@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { Track } from '../shared/classes/track';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlayerService {
   constructor(private http: HttpClient) {}
+
+  track = signal<Track | undefined>(undefined);
 
   getDevices(access_token: string): Observable<any> {
     // const baseHeaders = new HttpHeaders().set('Authorization', 'Bearer ' + access_token);
@@ -24,5 +27,10 @@ export class PlayerService {
           return results;
         })
       );
+  }
+
+  updateTrack(updatedTrack: Track) {
+    this.track.set(updatedTrack);
+    console.log(this.track);
   }
 }
