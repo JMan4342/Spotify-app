@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthorizationService } from '../authorization.service';
 import { combineLatest, map, Observable } from 'rxjs';
+import { PlayerComponent } from "../player/player.component";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, PlayerComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })

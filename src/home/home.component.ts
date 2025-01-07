@@ -9,7 +9,7 @@ import { LoginService } from '../login/login.service';
 //   }
 // }
 
-declare var Spotify:any;
+declare var Spotify: any;
 
 @Component({
   selector: 'app-home',
@@ -18,67 +18,71 @@ declare var Spotify:any;
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent implements OnInit {
-access_token: string = '';
+export class HomeComponent {
+  access_token: string = '';
 
-  constructor(private homeService: HomeService, 
-    private loginService: LoginService) {
-    this.access_token = this.loginService.accessToken$;
+  constructor(
+    // private homeService: HomeService,
+    // private loginService: LoginService
+  ) {
+    // this.access_token = this.loginService.accessToken$;
     // this.initializePlayer();
   }
 
-  ngOnInit() {
-    this.initializePlayer();
+  // ngOnInit() {
+  //   this.initializePlayer();
 
-    this.homeService.getDevices(this.access_token).subscribe({
-      next: results => {
-        console.log('Devices', results);
-      },
-      error: err => console.log(err),
-    });
-  }
+  //   this.homeService.getDevices(this.access_token).subscribe({
+  //     next: (results) => {
+  //       console.log('Devices', results);
+  //     },
+  //     error: (err) => console.log(err),
+  //   });
+  // }
 
-  initializePlayer() {
-    const script = document.createElement('script');
-    script.src = 'https://sdk.scdn.co/spotify-player.js';
-    script.type = 'text/javascript';
-    script.addEventListener('load', (e) => {
-      console.log(e);
-    });
-    document.head.appendChild(script);
-    (<any>window).onSpotifyWebPlaybackSDKReady = () => {
-        const token = this.access_token;
-        const player = new Spotify.Player({
-            name: 'Web Playback SDK Quick Start Player',
-            getOAuthToken: (cb: any) => { cb(token); },
-            volume: 0.5
-        });
-    
-        // Ready
-        player.addListener('ready', (device_id: string) => {
-            console.log('Ready with Device ID', device_id);
-        });
-    
-        // Not Ready
-        player.addListener('not_ready', (device_id: string) => {
-            console.log('Device ID has gone offline', device_id);
-        });
-    
-        player.addListener('initialization_error', (message: string) => {
-            console.error(message);
-        });
-    
-        player.addListener('authentication_error', (message: string) => {
-            console.error(message);
-        });
-    
-        player.addListener('account_error', (message: string) => {
-            console.error(message);
-        });
-    
-        player.connect();
-    }
-  }
+  // initializePlayer() {
+  //   const script = document.createElement('script');
+  //   script.src = 'https://sdk.scdn.co/spotify-player.js';
+  //   script.type = 'text/javascript';
+  //   script.addEventListener('load', (e) => {
+  //     console.log(e);
+  //   });
+  //   document.head.appendChild(script);
+  //   (<any>window).onSpotifyWebPlaybackSDKReady = () => {
+  //     const token = this.access_token;
+  //     const player = new Spotify.Player({
+  //       name: 'Web Playback SDK Quick Start Player',
+  //       getOAuthToken: (cb: any) => {
+  //         cb(token);
+  //       },
+  //       volume: 0.5,
+  //     });
+
+  //     // Ready
+  //     player.addListener('ready', (device_id: string) => {
+  //       console.log('Ready with Device ID', device_id);
+  //     });
+
+  //     // Not Ready
+  //     player.addListener('not_ready', (device_id: string) => {
+  //       console.log('Device ID has gone offline', device_id);
+  //     });
+
+  //     player.addListener('initialization_error', (message: string) => {
+  //       console.error(message);
+  //     });
+
+  //     player.addListener('authentication_error', (message: string) => {
+  //       console.error(message);
+  //     });
+
+  //     player.addListener('account_error', (message: string) => {
+  //       console.error(message);
+  //     });
+
+  //     player.connect();
+  //   };
+  // }
 
   // generateToken() {
   //   const clientId = '94ae63fe83f2425aacff1c2e78a88160';
